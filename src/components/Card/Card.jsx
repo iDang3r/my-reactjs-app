@@ -1,68 +1,78 @@
 import React, { useState } from "react";
 import style from './Card.module.css'
 
-export default function Card({title, text, currentLikes, commentsCountInit, commentsInit}) {
-    const [likes, changeLikes] = useState(currentLikes)
-    const [liked, setLiked] = useState(false)
-    const [full, setFull] = useState(false)
-    const [comments, _] = useState(commentsInit);
-    const [commentsCount, setCommentsCount] = useState(commentsCountInit)
-
-    const likeStyle = liked ? style.liked : style.notliked
-    let style_card = style.card
-    let div_comments = <div></div>
-
-    if (full) {
-        style_card += " " + style.make_full
-
-        if (commentsCount) {
-            div_comments = comments.map((comment, index) =>
-                <div className={style.comment}>
-                    <div className={style.comment_text}>{comment.text}</div>
-                    <div className={style.author}>by {comment.author}</div>
-                    <button
-                        onClick={() => {
-                            comments.splice(index, 1)
-                            setCommentsCount(commentsCount - 1)
-                        }}
-                        className={style.discard_comment}
-                    >
-                        <div>X</div>
-                    </button>
-                </div>
-            )
-        } else {
-            div_comments = <div className={style.comment}>
-                No comments
-            </div>
-        }
+export class Card extends React.Component  {
+    constructor(props) {
+        super(props);
+        this.state = {
+            likes: props.currentLikes,
+            liked: false,
+            full: false,
+            commentsCount: props.commentsCount,
+        };
     }
 
-    return (
-        <div className={style_card}>
-            <h1>{title}</h1>
-            <div className={style.text}>{text}</div>
+    render() {
+        const likeStyle = this.state.liked ? style.liked : style.notliked
+        let style_card = style.card
+        let div_comments = <div></div>
 
-            {div_comments}
+        if (this.state.full) {
+            style_card += " " + style.make_full
 
-            <button
-                onClick={() => setLiked(() => {
-                    changeLikes(likes + (liked ? -1 : 1))
-                    return !liked
-                })}
-                className={likeStyle + " " + style.likeButton}
-            >
-                <div>Likes: {likes}</div>
-            </button>
+            if (this.state.commentsCount) {
+                div_comments = this.props.comments.map((comment, index) =>
+                    <div className={style.comment}>
+                        <div className={style.comment_text}>{comment.text}</div>
+                        <div className={style.author}>by {comment.author}</div>
+                        <button
+                            onClick={() => {
+                                this.props.comments.splice(index, 1)
+                                this.setState({
+                                    commentsCount: this.state.commentsCount - 1
+                                })
+                            }}
+                            className={style.discard_comment}
+                        >
+                            <div>X</div>
+                        </button>
+                    </div>
+                )
+            } else {
+                div_comments = <div className={style.comment}>
+                    No comments
+                </div>
+            }
+        }
 
-            <button
-                onClick={() => {
-                    setFull(!full)
-                }}
-                className={style.commentsButton}
-            >
-                <div>{full ? "Hide comments" : "Open " + commentsCount + " comments"}</div>
-            </button>
-        </div>
-    )
+        return (
+            <div className={style_card}>
+                <h1>{this.props.title}</h1>
+                <div className={style.text}>{this.props.text}</div>
+
+                {div_comments}
+
+                <button
+                    onClick={() => this.setState({
+                        likes: this.state.likes + (this.state.liked ? -1 : 1),
+                        liked: !this.state.liked
+                    })}
+                    className={likeStyle + " " + style.likeButton}
+                >
+                    <div>Likes: {this.state.likes}</div>
+                </button>
+
+                <button
+                    onClick={() => {
+                        this.setState({
+                            full: !this.state.full
+                        })
+                    }}
+                    className={style.commentsButton}
+                >
+                    <div>{this.state.full ? "Hide comments" : "Open " + this.state.commentsCount + " comments"}</div>
+                </button>
+            </div>
+        )
+    }
 }
