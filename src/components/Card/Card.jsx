@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import style from './Card.module.css'
 
-export default function Card({title, text, currentLikes}) {
+export default function Card({title, text, currentLikes, commentsCountInit, commentsInit}) {
     const [likes, changeLikes] = useState(currentLikes)
     const [liked, setLiked] = useState(false)
     const [full, setFull] = useState(false)
-    const [re, my_rerender] = useState(true)
-    const [comments, updateComments] = useState(["Comment1", "Comment2", "Comment3"]);
+    const [comments, _] = useState(commentsInit);
+    const [commentsCount, setCommentsCount] = useState(commentsCountInit)
 
     const likeStyle = liked ? style.liked : style.notliked
     let style_card = style.card
@@ -15,15 +15,15 @@ export default function Card({title, text, currentLikes}) {
     if (full) {
         style_card += " " + style.make_full
 
-        if (comments.length) {
+        if (commentsCount) {
             div_comments = comments.map((comment, index) =>
-                <div className={style.comment} key={comment}>
-                    {comment}
+                <div className={style.comment}>
+                    <div className={style.comment_text}>{comment.text}</div>
+                    <div className={style.author}>by {comment.author}</div>
                     <button
                         onClick={() => {
                             comments.splice(index, 1)
-                            // updateComments(comments)
-                            my_rerender(!re)
+                            setCommentsCount(commentsCount - 1)
                         }}
                         className={style.discard_comment}
                     >
@@ -61,7 +61,7 @@ export default function Card({title, text, currentLikes}) {
                 }}
                 className={style.commentsButton}
             >
-                <div>{full ? "Hide comments" : "Open " + comments.length + " comments"}</div>
+                <div>{full ? "Hide comments" : "Open " + commentsCount + " comments"}</div>
             </button>
         </div>
     )

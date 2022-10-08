@@ -1,15 +1,18 @@
 import './App.css';
-import mockData from './assets/mock-data.json'
+import articles from './data/articles.json'
+import comments from './data/comments.json'
 import Card from './components/Card/Card'
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-          {mockData.map(card => <Card
+          {articles.map(card => <Card
               title={card.title}
               text={card.text}
               currentLikes={card.currentLikes}
+              commentsCountInit={card.commentsCount}
+              commentsInit={comments.filter((comment) => comment.articleId === card.articleId)}
           />)}
       </header>
     </div>

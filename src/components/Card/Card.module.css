@@ -56,3 +56,12 @@
     transform: translate(0, -50%);
     right: 15px;
 }
+
+.comment_text {
+    font-size: 26px;
+}
+
+.author {
+    font-size: 20px;
+    color: #1f041f;
+}
