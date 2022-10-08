@@ -61,7 +61,7 @@ export default function Card({title, text, currentLikes}) {
                 }}
                 className={style.commentsButton}
             >
-                <div>{full ? "Hide comments" : "Open comments"}</div>
+                <div>{full ? "Hide comments" : "Open " + comments.length + " comments"}</div>
             </button>
         </div>
     )
