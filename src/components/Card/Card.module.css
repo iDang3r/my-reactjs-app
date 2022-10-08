@@ -7,6 +7,14 @@
     padding-bottom: 1%;
 }
 
+.text {
+    padding-bottom: 10px;
+}
+
+.make_full {
+    width: 50%;
+}
+
 .like {
     width: 20%;
 }
@@ -20,8 +28,31 @@
 }
 
 .likeButton {
-    /*width: 10%;*/
     font-size: 26px;
-    /*padding: 10%;*/
     margin-top: 10px;
+}
+
+.commentsButton {
+    font-size: 26px;
+    background: rgba(225, 220, 225, 0.76);
+}
+
+.comment {
+    font-size: 26px;
+    width: 80%;
+    margin-left: 10%;
+    background-color: #52849b;
+    border: 2px solid #d9ff50;
+    border-radius: 30px;
+    margin-bottom: 1%;
+    padding: 1%;
+    position: relative;
+}
+
+.discard_comment {
+    background: #ff6c6c;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 15px;
 }
