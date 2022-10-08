@@ -19,7 +19,7 @@ export function Card(props) {
 
     const makeComment = (comment, index) => {
         return <div className={style.comment}>
-            <div className={style.comment_text}>{comment.text}</div>
+            <div className={style.commentText}>{comment.text}</div>
             <div className={style.author}>by {comment.author}</div>
             <button
                 onClick={() => {
