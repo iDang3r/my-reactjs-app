@@ -1,0 +1,27 @@
+.card {
+    width: 30%;
+    background-color: #3b6072;
+    border: 5px solid #d9ff50;
+    border-radius: 30px;
+    margin-bottom: 1%;
+    padding-bottom: 1%;
+}
+
+.like {
+    width: 20%;
+}
+
+.notliked {
+    background: #938289;
+}
+
+.liked {
+    background: #ff6c6c;
+}
+
+.likeButton {
+    /*width: 10%;*/
+    font-size: 26px;
+    /*padding: 10%;*/
+    margin-top: 10px;
+}
