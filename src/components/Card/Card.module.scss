@@ -44,6 +44,10 @@
 
     &NotLiked {
         background: #938289;
+
+        &:hover {
+            background: #e39c9c;
+        }
     }
 
     &Liked {
