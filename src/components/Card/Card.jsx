@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import style from './Card.module.css'
+import style from './Card.module.scss'
 
 export class Card extends React.Component  {
     constructor(props) {
