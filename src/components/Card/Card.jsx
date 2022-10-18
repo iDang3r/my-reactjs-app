@@ -46,7 +46,7 @@ export class Card extends React.Component  {
         }
 
         return (
-            <div className={cx({card: true}, {cardMakeFull: this.state.full})}>
+            <div className={cx({card: true}, this.state.full ? style.cardFull : style.cardNotFull)}>
                 <h1>{this.props.title}</h1>
                 <div className={style.text}>{this.props.text}</div>
 
