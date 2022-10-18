@@ -1,5 +1,8 @@
-import React from "react";
+import React, {useState} from "react"
 import style from './Card.module.scss'
+import classNames from "classnames/bind"
+
+const cx = classNames.bind(style)
 
 export function Card(props) {
     const [likes, setLikes] = useState(props.currentLikes)
@@ -7,8 +10,6 @@ export function Card(props) {
     const [full, setFull] = useState(false)
     const [commentsCount, setCommentsCount] = useState(props.commentsCount)
 
-    const likeStyle = liked ? style.liked : style.notLiked
-    let styleCard = style.card + (full ? " " + style.makeFull : "")
     let divComments = <div></div>
 
     const makeEmptyComment = () => {
@@ -47,7 +48,7 @@ export function Card(props) {
     }
 
     return (
-        <div className={styleCard}>
+        <div className={cx({card: true}, full ? style.cardMakeFull : "")}>
             <h1>{props.title}</h1>
             <div className={style.text}>{props.text}</div>
 
@@ -58,7 +59,7 @@ export function Card(props) {
                     setLikes(likes + (liked ? -1 : 1))
                     return !liked
                 })}
-                className={likeStyle + " " + style.likeButton}
+                className={cx({likeButton: true}, liked ? style.likeButtonLiked : style.likeButtonNotLiked)}
             >
                 <div>Likes: {likes}</div>
             </button>

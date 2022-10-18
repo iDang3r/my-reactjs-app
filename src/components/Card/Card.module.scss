@@ -5,6 +5,17 @@
     border-radius: 30px;
     margin-bottom: 1%;
     padding-bottom: 1%;
+
+    &MakeFull {
+        width: 50%;
+    }
+}
+
+@mixin setFont($size) {
+    font-size: $size;
+
+    justify-content: center;
+    align-items: center;
 }
 
 .text {
@@ -28,17 +39,24 @@
 }
 
 .likeButton {
-    font-size: 26px;
+    @include setFont(26px);
     margin-top: 10px;
+
+    &NotLiked {
+        background: #938289;
+    }
+
+    &Liked {
+        background: #ff6c6c;
+    }
 }
 
 .commentsButton {
-    font-size: 26px;
+    @include setFont(26px);
     background: rgba(225, 220, 225, 0.76);
 }
 
 .comment {
-    font-size: 26px;
     width: 80%;
     margin-left: 10%;
     background-color: #52849b;
@@ -47,6 +65,10 @@
     margin-bottom: 1%;
     padding: 1%;
     position: relative;
+
+    &Text {
+        @include setFont(26px);
+    }
 }
 
 .discardComment {
@@ -62,6 +84,6 @@
 }
 
 .author {
-    font-size: 20px;
+    @include setFont(20px);
     color: #1f041f;
 }
