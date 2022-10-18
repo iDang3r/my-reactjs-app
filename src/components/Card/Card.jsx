@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import style from './Card.module.scss'
 
 export class Card extends React.Component  {
