@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import articles from './data/articles.json'
 import comments from './data/comments.json'
 import {Card} from './components/Card/Card'
