@@ -38,9 +38,10 @@ export class Card extends React.Component  {
                     </div>
                 )
             } else {
-                div_comments = <div className={style.comment}>
-                    No comments
-                </div>
+                div_comments =
+                    <div className={style.comment}>
+                        No comments
+                    </div>
             }
         }
 
