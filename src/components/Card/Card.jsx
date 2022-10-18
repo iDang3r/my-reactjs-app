@@ -48,7 +48,7 @@ export function Card(props) {
     }
 
     return (
-        <div className={cx({card: true}, full ? style.cardMakeFull : "")}>
+        <div className={cx({card: true}, full ? style.cardFull : style.cardNotFull)}>
             <h1>{props.title}</h1>
             <div className={style.text}>{props.text}</div>
 
