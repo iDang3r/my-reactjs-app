@@ -45,7 +45,11 @@
 
 .commentsButton {
     @include setFont(26px);
-    background: rgba(225, 220, 225, 0.76);
+    background: #b9b2c0;
+
+    &:hover {
+        background: #978aa2;
+    }
 }
 
 .comment {
