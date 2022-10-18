@@ -1,12 +1,42 @@
 .card {
-    width: 30%;
     background-color: #3b6072;
     border: 5px solid #d9ff50;
     border-radius: 30px;
     margin-bottom: 1%;
     padding-bottom: 1%;
 
-    &MakeFull {
+    &NotFull {
+        width: 30%;
+    }
+
+    &Full {
+        width: 50%;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cardNotFull {
+        animation: CardAnimation 0.2s alternate;
+    }
+    .cardFull {
+        animation: CardAnimationFull 0.2s alternate;
+    }
+}
+
+@keyframes CardAnimation {
+    from {
+        width: 50%;
+    }
+    to {
+        width: 30%;
+    }
+}
+
+@keyframes CardAnimationFull {
+    from {
+        width: 30%;
+    }
+    to {
         width: 50%;
     }
 }
