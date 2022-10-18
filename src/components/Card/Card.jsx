@@ -1,29 +1,28 @@
-import React from "react";
+import React from "react"
 import style from './Card.module.scss'
+import classNames from "classnames/bind"
+
+const cx = classNames.bind(style)
 
 export class Card extends React.Component  {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             likes: props.currentLikes,
             liked: false,
             full: false,
             commentsCount: props.commentsCount,
-        };
+        }
     }
 
     render() {
-        const likeStyle = this.state.liked ? style.liked : style.notliked
-        let style_card = style.card
         let div_comments = <div></div>
 
         if (this.state.full) {
-            style_card += " " + style.make_full
-
             if (this.state.commentsCount) {
                 div_comments = this.props.comments.map((comment, index) =>
                     <div className={style.comment}>
-                        <div className={style.comment_text}>{comment.text}</div>
+                        <div className={style.commentText}>{comment.text}</div>
                         <div className={style.author}>by {comment.author}</div>
                         <button
                             onClick={() => {
@@ -32,7 +31,7 @@ export class Card extends React.Component  {
                                     commentsCount: this.state.commentsCount - 1
                                 })
                             }}
-                            className={style.discard_comment}
+                            className={style.discardComment}
                         >
                             <div>X</div>
                         </button>
@@ -46,7 +45,7 @@ export class Card extends React.Component  {
         }
 
         return (
-            <div className={style_card}>
+            <div className={cx({card: true}, {cardMakeFull: this.state.full})}>
                 <h1>{this.props.title}</h1>
                 <div className={style.text}>{this.props.text}</div>
 
@@ -57,7 +56,7 @@ export class Card extends React.Component  {
                         likes: this.state.likes + (this.state.liked ? -1 : 1),
                         liked: !this.state.liked
                     })}
-                    className={likeStyle + " " + style.likeButton}
+                    className={cx({likeButton: true}, this.state.liked ? style.likeButtonLiked : style.likeButtonNotLiked)}
                 >
                     <div>Likes: {this.state.likes}</div>
                 </button>
