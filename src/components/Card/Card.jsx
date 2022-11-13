@@ -8,33 +8,42 @@ export function Card(props) {
     const [commentsCount, setCommentsCount] = useState(props.commentsCount)
 
     const likeStyle = liked ? style.liked : style.notLiked
-    let styleCard = style.card
+    let styleCard = style.card + (full ? " " + style.makeFull : "")
     let divComments = <div></div>
 
-    if (full) {
-        styleCard += " " + style.makeFull
+    const makeEmptyComment = () => {
+        return <div className={style.comment}>
+            No comments
+        </div>
+    }
 
-        if (commentsCount) {
-            divComments = props.comments.map((comment, index) =>
-                <div className={style.comment}>
-                    <div className={style.comment_text}>{comment.text}</div>
-                    <div className={style.author}>by {comment.author}</div>
-                    <button
-                        onClick={() => {
-                            props.comments.splice(index, 1)
-                            setCommentsCount(commentsCount - 1)
-                        }}
-                        className={style.discardComment}
-                    >
-                        <div>X</div>
-                    </button>
-                </div>
-            )
-        } else {
-            divComments = <div className={style.comment}>
-                No comments
-            </div>
+    const makeComment = (comment, index) => {
+        return <div className={style.comment}>
+            <div className={style.comment_text}>{comment.text}</div>
+            <div className={style.author}>by {comment.author}</div>
+            <button
+                onClick={() => {
+                    props.comments.splice(index, 1)
+                    setCommentsCount(commentsCount - 1)
+                }}
+                className={style.discardComment}
+            >
+                <div>X</div>
+            </button>
+        </div>
+    }
+
+    const getComments = () => {
+        if (!commentsCount) {
+            return makeEmptyComment()
         }
+        return props.comments.map((comment, index) =>
+            makeComment(comment, index)
+        )
+    }
+
+    if (full) {
+        divComments = getComments()
     }
 
     return (
