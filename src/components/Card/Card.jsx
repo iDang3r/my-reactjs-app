@@ -13,15 +13,15 @@ export class Card extends React.Component  {
     }
 
     render() {
-        const likeStyle = this.state.liked ? style.liked : style.notliked
-        let style_card = style.card
-        let div_comments = <div></div>
+        const likeStyle = this.state.liked ? style.liked : style.notLiked
+        let styleCard = style.card
+        let divComments = <div></div>
 
         if (this.state.full) {
-            style_card += " " + style.make_full
+            styleCard += " " + style.makeFull
 
             if (this.state.commentsCount) {
-                div_comments = this.props.comments.map((comment, index) =>
+                divComments = this.props.comments.map((comment, index) =>
                     <div className={style.comment}>
                         <div className={style.comment_text}>{comment.text}</div>
                         <div className={style.author}>by {comment.author}</div>
@@ -32,25 +32,25 @@ export class Card extends React.Component  {
                                     commentsCount: this.state.commentsCount - 1
                                 })
                             }}
-                            className={style.discard_comment}
+                            className={style.discardComment}
                         >
                             <div>X</div>
                         </button>
                     </div>
                 )
             } else {
-                div_comments = <div className={style.comment}>
+                divComments = <div className={style.comment}>
                     No comments
                 </div>
             }
         }
 
         return (
-            <div className={style_card}>
+            <div className={styleCard}>
                 <h1>{this.props.title}</h1>
                 <div className={style.text}>{this.props.text}</div>
 
-                {div_comments}
+                {divComments}
 
                 <button
                     onClick={() => this.setState({
