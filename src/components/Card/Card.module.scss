@@ -1,0 +1,110 @@
+@import '../mixins.scss';
+
+.card {
+    background-color: #3b6072;
+    border: 5px solid #d9ff50;
+    border-radius: 30px;
+    margin-bottom: 1%;
+    padding-bottom: 1%;
+
+    &NotFull {
+        width: 30%;
+    }
+
+    &Full {
+        width: 50%;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .cardNotFull {
+        animation: CardAnimation 0.2s alternate;
+    }
+    .cardFull {
+        animation: CardAnimationFull 0.2s alternate;
+    }
+}
+
+@keyframes CardAnimation {
+    from {
+        width: 50%;
+    }
+    to {
+        width: 30%;
+    }
+}
+
+@keyframes CardAnimationFull {
+    from {
+        width: 30%;
+    }
+    to {
+        width: 50%;
+    }
+}
+
+.text {
+    padding-bottom: 10px;
+}
+
+.like {
+    width: 20%;
+}
+
+.likeButton {
+    @include setFont(26px);
+    margin-top: 10px;
+
+    &NotLiked {
+        background: #938289;
+
+        &:hover {
+            background: #e39c9c;
+        }
+    }
+
+    &Liked {
+        background: #ff6c6c;
+    }
+}
+
+.commentsButton {
+    @include setFont(26px);
+    background: #b9b2c0;
+
+    &:hover {
+        background: #978aa2;
+    }
+}
+
+.comment {
+    width: 80%;
+    margin-left: 10%;
+    background-color: #52849b;
+    border: 2px solid #d9ff50;
+    border-radius: 30px;
+    margin-bottom: 1%;
+    padding: 1%;
+    position: relative;
+
+    &Text {
+        @include setFont(26px);
+    }
+}
+
+.discardComment {
+    background: #ff6c6c;
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    right: 15px;
+}
+
+.commentText {
+    font-size: 26px;
+}
+
+.author {
+    @include setFont(20px);
+    color: #1f041f;
+}

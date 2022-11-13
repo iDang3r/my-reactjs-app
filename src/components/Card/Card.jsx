@@ -1,25 +1,74 @@
-import React, { useState } from "react";
-import style from './Card.module.css'
+import React, {useState} from "react"
+import style from './Card.module.scss'
+import classNames from "classnames/bind"
 
-export default function Card({title, text, currentLikes}) {
-    const [likes, changeLikes] = useState(currentLikes)
+const cx = classNames.bind(style)
+
+export function Card(props) {
+    const [likes, setLikes] = useState(props.currentLikes)
     const [liked, setLiked] = useState(false)
+    const [full, setFull] = useState(false)
+    const [commentsCount, setCommentsCount] = useState(props.commentsCount)
 
-    const likeStyle = liked ? style.liked : style.notliked
+    let divComments = <div></div>
+
+    const makeEmptyComment = () => {
+        return <div className={style.comment}>
+            No comments
+        </div>
+    }
+
+    const makeComment = (comment, index) => {
+        return <div className={style.comment}>
+            <div className={style.commentText}>{comment.text}</div>
+            <div className={style.author}>by {comment.author}</div>
+            <button
+                onClick={() => {
+                    props.comments.splice(index, 1)
+                    setCommentsCount(commentsCount - 1)
+                }}
+                className={style.discardComment}
+            >
+                <div>X</div>
+            </button>
+        </div>
+    }
+
+    const getComments = () => {
+        if (!commentsCount) {
+            return makeEmptyComment()
+        }
+        return props.comments.map((comment, index) =>
+            makeComment(comment, index)
+        )
+    }
+
+    if (full) {
+        divComments = getComments()
+    }
+
     return (
-        <div className={style.card}>
-            <h1>{title}</h1>
-            <div>{text}</div>
+        <div className={cx({card: true}, full ? style.cardFull : style.cardNotFull)}>
+            <h1>{props.title}</h1>
+            <div className={style.text}>{props.text}</div>
+
+            {divComments}
+
             <button
                 onClick={() => setLiked(() => {
-                    changeLikes(likes + (liked ? -1 : 1))
+                    setLikes(likes + (liked ? -1 : 1))
                     return !liked
                 })}
-                className={likeStyle + " " + style.likeButton}
+                className={cx({likeButton: true}, liked ? style.likeButtonLiked : style.likeButtonNotLiked)}
             >
-            <div>
                 <div>Likes: {likes}</div>
-            </div>
+            </button>
+
+            <button
+                onClick={() => setFull(!full)}
+                className={style.commentsButton}
+            >
+                <div>{full ? "Hide comments" : "Open " + commentsCount + " comments"}</div>
             </button>
         </div>
     )
