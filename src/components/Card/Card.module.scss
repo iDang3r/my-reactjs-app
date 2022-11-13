@@ -1,3 +1,5 @@
+@import '../mixins.scss';
+
 .card {
     background-color: #3b6072;
     border: 5px solid #d9ff50;
@@ -39,13 +41,6 @@
     to {
         width: 50%;
     }
-}
-
-@mixin setFont($size) {
-    font-size: $size;
-
-    justify-content: center;
-    align-items: center;
 }
 
 .text {
