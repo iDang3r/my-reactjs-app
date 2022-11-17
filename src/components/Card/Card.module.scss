@@ -1,3 +1,5 @@
+@import '../mixins.scss';
+
 .card {
     background-color: #3b6072;
     border: 5px solid #d9ff50;
@@ -44,13 +46,6 @@
     to {
         width: 61%;
     }
-}
-
-@mixin setFont($size) {
-    font-size: $size;
-
-    justify-content: center;
-    align-items: center;
 }
 
 .text {
@@ -108,9 +103,9 @@
 }
 
 .editButton {
-    height: 10%;
+    padding: 1%;
     position: absolute;
-    top: 3%;
+    top: 10px;
     left: 1%;
     border-radius: 20px;
     background: #b9b2c0;
@@ -171,4 +166,8 @@
     transform: translate(0, -10px);
     font-size: 24px;
     border-radius: 0 0 30px 30px;
+
+    &:hover {
+        background-color: #517d93;
+    }
 }

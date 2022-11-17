@@ -1,9 +1,4 @@
-@mixin setFont($size) {
-  font-size: $size;
-
-  justify-content: center;
-  align-items: center;
-}
+@import '../mixins.scss';
 
 .comment {
   width: 80%;
@@ -66,4 +61,3 @@
     background: #ff6c6c;
   }
 }
-
