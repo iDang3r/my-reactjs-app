@@ -6,45 +6,50 @@
     border-radius: 30px;
     margin-bottom: 1%;
     padding-bottom: 1%;
+    position: relative;
 
     &NotFull {
-        width: 30%;
+        width: 40%;
     }
 
     &Full {
-        width: 50%;
+        width: 60%;
     }
+}
+
+.title {
+
 }
 
 @media (prefers-reduced-motion: no-preference) {
     .cardNotFull {
-        animation: CardAnimation 0.2s alternate;
+        animation: CardAnimation 0.25s alternate;
     }
     .cardFull {
-        animation: CardAnimationFull 0.2s alternate;
+        animation: CardAnimationFull 0.25s alternate;
     }
 }
 
 @keyframes CardAnimation {
     from {
-        width: 50%;
+        width: 61%;
     }
     to {
-        width: 30%;
+        width: 39%;
     }
 }
 
 @keyframes CardAnimationFull {
     from {
-        width: 30%;
+        width: 39%;
     }
     to {
-        width: 50%;
+        width: 61%;
     }
 }
 
 .text {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 
 .like {
@@ -71,40 +76,98 @@
 .commentsButton {
     @include setFont(26px);
     background: #b9b2c0;
+    margin-left: 1%;
 
     &:hover {
         background: #978aa2;
     }
 }
 
-.comment {
-    width: 80%;
-    margin-left: 10%;
-    background-color: #52849b;
-    border: 2px solid #d9ff50;
-    border-radius: 30px;
-    margin-bottom: 1%;
-    padding: 1%;
-    position: relative;
-
-    &Text {
-        @include setFont(26px);
-    }
-}
-
-.discardComment {
-    background: #ff6c6c;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
-    right: 15px;
-}
-
-.commentText {
-    font-size: 26px;
-}
-
 .author {
     @include setFont(20px);
     color: #1f041f;
+}
+
+.createDate {
+    color: #050513;
+    font-size: 18px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.hide {
+    display: none;
+}
+
+.editButton {
+    padding: 1%;
+    position: absolute;
+    top: 10px;
+    left: 1%;
+    border-radius: 20px;
+    background: #b9b2c0;
+    font-size: 14px;
+
+    &:hover {
+        background: #978aa2;
+    }
+}
+
+.editWindow {
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.titleChange {
+    background-color: #3b6072;
+    border: 5px solid #d9ff50;
+    font-size: 30px;
+    margin-left: 39%;
+    width: 20%;
+    padding: 2%;
+    border-radius: 30px 30px 0 0;
+}
+
+.titleForm {
+    margin-top: 4%;
+    width: 80%;
+    padding: 3%;
+    font-size: 30px;
+}
+
+.textChange {
+    background-color: #3b6072;
+    border: 5px solid #d9ff50;
+    font-size: 30px;
+    margin-left: 29%;
+    width: 40%;
+    padding: 2%;
+    border-radius: 30px;
+    transform: translate(0, -5px);
+}
+
+.textForm {
+    width: 80%;
+    padding: 3%;
+    font-size: 20px;
+    margin-top: 4%;
+    height: 10vh;
+}
+
+.submitButton {
+    background-color: #3b6072;
+    border: 5px solid #d9ff50;
+    width: 10%;
+    padding: 1%;
+    transform: translate(0, -10px);
+    font-size: 24px;
+    border-radius: 0 0 30px 30px;
+
+    &:hover {
+        background-color: #517d93;
+    }
 }

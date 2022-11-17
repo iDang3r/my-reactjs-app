@@ -1,0 +1,16 @@
+.likeButton {
+  font-size: 26px;
+  margin-top: 10px;
+
+  &NotLiked {
+    background: #938289;
+
+    &:hover {
+      background: #e39c9c;
+    }
+  }
+
+  &Liked {
+    background: #ff6c6c;
+  }
+}

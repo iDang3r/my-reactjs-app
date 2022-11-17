@@ -2,31 +2,57 @@
   {
     "author": "Sofa",
     "articleId": 33,
-    "text": "Comment comment comment"
+    "text": "Comment comment comment",
+    "currentLikes": 2,
+    "createDate": "2022-04-23"
   },
   {
     "author": "Ivan",
     "articleId": 5,
-    "text": "Random text from Ivan"
+    "text": "Random text from Ivan",
+    "currentLikes": 23,
+    "createDate": "2021-08-29"
   },
   {
     "author": "Oleg",
     "articleId": 5,
-    "text": "Long text long text long text long text long text long text"
+    "text": "Long text long text long text long text long text long textLong text long text long text long text long text long textLong text long text long text long text long text long textLong text long text long text long text long text long textLong text long text long text long text long text long text",
+    "currentLikes": 5,
+    "createDate": "2022-01-09"
   },
   {
     "author": "Roman",
     "articleId": 33,
-    "text": "Short text"
+    "text": "Short text",
+    "currentLikes": 0,
+    "createDate": "2022-11-10"
   },
   {
     "author": "Bob",
     "articleId": 16,
-    "text": "Short text from Bob"
+    "text": "Short text from Bob",
+    "currentLikes": 20,
+    "createDate": "2022-07-08"
   },
   {
     "author": "Roman",
     "articleId": 11,
-    "text": "Short text from Frank + random random random"
+    "text": "Short text from Frank + random random random",
+    "currentLikes": 10,
+    "createDate": "2022-05-19"
+  },
+  {
+    "author": "Alexey",
+    "articleId": 33,
+    "text": "boba aboba",
+    "currentLikes": 21,
+    "createDate": "2022-06-29"
+  },
+  {
+    "author": "Gena",
+    "articleId": 33,
+    "text": "I love ReactJS",
+    "currentLikes": 1,
+    "createDate": "2022-03-11"
   }
 ]
