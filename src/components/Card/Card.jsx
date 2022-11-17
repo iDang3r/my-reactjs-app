@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import {useState} from 'react'
 import style from './Card.module.scss'
 import classNames from 'classnames/bind'
 import {Comment} from '../Comment/Comment'
 import {Sort, SortType, getLikesSortHandler, getDateSortHandler,
         getLikeSortSymbol, getDateSortSymbol}
     from '../Common'
-import {PopUp} from "../PopUpWindow/PopUpWindow";
+import {PopUp} from '../PopUpWindow/PopUpWindow';
 
 const cx = classNames.bind(style)
 
