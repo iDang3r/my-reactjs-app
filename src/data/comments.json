@@ -1,5 +1,6 @@
 [
   {
+    "commentId": 1,
     "author": "Sofa",
     "articleId": 33,
     "text": "Comment comment comment",
@@ -7,6 +8,7 @@
     "createDate": "2022-04-23"
   },
   {
+    "commentId": 4,
     "author": "Ivan",
     "articleId": 5,
     "text": "Random text from Ivan",
@@ -14,6 +16,7 @@
     "createDate": "2021-08-29"
   },
   {
+    "commentId": 5,
     "author": "Oleg",
     "articleId": 5,
     "text": "Long text long text long text long text long text long textLong text long text long text long text long text long textLong text long text long text long text long text long textLong text long text long text long text long text long textLong text long text long text long text long text long text",
@@ -21,6 +24,7 @@
     "createDate": "2022-01-09"
   },
   {
+    "commentId": 7,
     "author": "Roman",
     "articleId": 33,
     "text": "Short text",
@@ -28,6 +32,7 @@
     "createDate": "2022-11-10"
   },
   {
+    "commentId": 8,
     "author": "Bob",
     "articleId": 16,
     "text": "Short text from Bob",
@@ -35,6 +40,7 @@
     "createDate": "2022-07-08"
   },
   {
+    "commentId": 10,
     "author": "Roman",
     "articleId": 11,
     "text": "Short text from Frank + random random random",
@@ -42,6 +48,7 @@
     "createDate": "2022-05-19"
   },
   {
+    "commentId": 11,
     "author": "Alexey",
     "articleId": 33,
     "text": "boba aboba",
@@ -49,6 +56,7 @@
     "createDate": "2022-06-29"
   },
   {
+    "commentId": 15,
     "author": "Gena",
     "articleId": 33,
     "text": "I love ReactJS",

@@ -1,0 +1,19 @@
+a:link {
+  text-decoration: none;
+}
+
+.link {
+  background-color: #3b6072;
+  border: 5px solid #d9ff50;
+  border-radius: 30px;
+  padding: 4%;
+  color: #f3eeee;
+
+  &:hover {
+    background-color: #517d93;
+  }
+}
+
+.button {
+  width: 20%;
+}

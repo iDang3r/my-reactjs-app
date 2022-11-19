@@ -1,33 +1,52 @@
 import {useState} from 'react'
 import style from './Card.module.scss'
 import classNames from 'classnames/bind'
-import {Comment} from '../Comment/Comment'
+import Comment from '../Comment/Comment'
 import {Sort, SortType, getLikesSortHandler, getDateSortHandler,
         getLikeSortSymbol, getDateSortSymbol}
     from '../Common'
-import {PopUp} from '../PopUpWindow/PopUpWindow';
+import {PopUp} from '../PopUpWindow/PopUpWindow'
+
+import {connect} from 'react-redux'
+import {actionSetCard} from '../../store/actions/setCard'
+import {useNavigate} from 'react-router-dom'
+
+const mapStateToProps = (state) => ({
+    allComments: state.commentsReducer.comments,
+    cards: state.cardsReducer.cards,
+})
+
+const mapDispatchToProps = (dispatch) => ({
+    setCard: (newCard) => dispatch(actionSetCard(newCard)),
+})
 
 const cx = classNames.bind(style)
 
-export function Card(props) {
-    const [title, setTitle] = useState(props.title)
-    const [text, setText] = useState(props.text)
-    const [liked, setLiked] = useState(false)
-    const [full, setFull] = useState(false)
-    const [commentsCount, setCommentsCount] = useState(props.commentsCount)
+function Card({cards, allComments, cardId, onSelfPage, setCard}) {
+    const navigate = useNavigate()
+
+    let card = cards.find(card => card.articleId.toString() === cardId.toString())
+    if (card === undefined) {
+        navigate('/NotFound')
+    }
+
+    const comments = allComments.filter((comment) => comment.articleId.toString() === cardId.toString())
+
     const [sortType, setSortType] = useState(SortType.default)
-    const [edit, setEdit] = useState(false)
 
     const popUpEditWindow = () => {
-        setEdit(!edit)
+        card.edit = !card.edit
+        setCard(card)
     }
 
     const handleTitleChange = (event) => {
-        setTitle(event.target.value)
+        card.title = event.target.value
+        setCard(card)
     }
 
     const handleTextChange = (event) => {
-        setText(event.target.value)
+        card.text = event.target.value
+        setCard(card)
     }
 
     const handleSubmit = () => {
@@ -38,38 +57,31 @@ export function Card(props) {
 
     const makeEmptyComment = () => {
         return <Comment
-            index={-1}
-            text={"No comments"}
+            key={-1}
+            commentId={-1}
+            text={'No comments'}
         />
     }
 
-    const makeComment = (comment, index) => {
+    const makeComment = (comment) => {
         return <Comment
-            key={comment.text}
-            index={index}
-            deleteComment={() => {
-                props.comments.splice(index, 1)
-                setCommentsCount(commentsCount - 1)
-            }}
-            text={comment.text}
-            author={comment.author}
-            currentLikes={comment.currentLikes}
-            createDate={comment.createDate}
+            key={comment.commentId}
+            commentId={comment.commentId}
         />
     }
 
     const getComments = () => {
-        if (!commentsCount) {
+        if (!card.commentsCount) {
             return makeEmptyComment()
         }
-        Sort(props.comments, sortType)
+        Sort(comments, sortType)
 
-        return props.comments.map((comment, index) =>
+        return comments.map((comment, index) =>
             makeComment(comment, index)
         )
     }
 
-    if (full) {
+    if (onSelfPage) {
         divComments = getComments()
     }
 
@@ -78,58 +90,66 @@ export function Card(props) {
             <form onSubmit={handleSubmit}>
                 <div className={style.titleChange}>
                     Card title:
-                    <input className={style.titleForm} type="text" value={title} onChange={handleTitleChange} />
+                    <input className={style.titleForm} value={card.title} onChange={handleTitleChange} />
                 </div>
                 <div className={style.textChange}>
                     Card text:
-                    <textarea className={style.textForm} value={text} onChange={handleTextChange} />
+                    <textarea className={style.textForm} value={card.text} onChange={handleTextChange} />
                 </div>
-                <input className={style.submitButton} type="submit" value="Submit"/>
+                <input className={style.submitButton} type='submit' value='Submit'/>
             </form>
         </div>
 
     return (
-        <div className={cx({card: true}, full ? style.cardFull : style.cardNotFull)}>
+        <div className={cx({card: true}, onSelfPage ? style.cardFull : style.cardNotFull)}>
             <div>
                 <button
-                    className={style.editButton}
                     onClick={popUpEditWindow}
+                    className={cx(style.editButton, {hide: !onSelfPage})}
                 >Edit card</button>
-                {edit ? <PopUp inner={editWindow}/> : null}
+                {card.edit ? <PopUp inner={editWindow}/> : null}
             </div>
 
-            <div className={style.createDate}>{props.createDate}</div>
-            <h1  className={style.title}>{title}</h1>
-            <div className={style.text}>{text}</div>
+            <div className={style.createDate}>{card.createDate}</div>
+            <h1  className={style.title}>{card.title}</h1>
+            <div className={style.text}>{card.text}</div>
 
             {divComments}
 
             <button
-                onClick={() => setLiked(!liked)}
-                className={cx({likeButton: true}, liked ? style.likeButtonLiked : style.likeButtonNotLiked)}
+                onClick={() => {
+                    card.currentLikes += (card.liked) ? -1 : 1
+                    card.liked = !card.liked
+                    setCard(card)
+                }}
+                className={cx({likeButton: true}, card.liked ? style.likeButtonLiked : style.likeButtonNotLiked)}
             >
-                <div>Likes: {props.currentLikes + (liked ? 1 : 0)}</div>
+                <div>Likes: {card.currentLikes}</div>
             </button>
 
             <button
-                onClick={() => {
-                    setFull(!full)
-                }}
-                className={style.commentsButton}
-            >
-                <div>{full ? "Hide comments" : "Open " + commentsCount + " comments"}</div>
+                onClick={() => navigate('/card/' + cardId)}
+                className={cx(style.commentsButton, {hide: onSelfPage})}
+            >{'Open card (' + card.commentsCount + ' comments)'}
+            </button>
+            <button
+                onClick={() => navigate('/cards')}
+                className={cx(style.commentsButton, {hide: !onSelfPage})}
+            >{'Go back to cards'}
             </button>
 
             <button
                 onClick={getLikesSortHandler(sortType, setSortType)}
-                className={cx(style.commentsButton, {hide: !full})}
-            >{"Sort by likes " + getLikeSortSymbol(sortType)}
+                className={cx(style.commentsButton, {hide: !onSelfPage})}
+            >{'Sort by likes ' + getLikeSortSymbol(sortType)}
             </button>
             <button
                 onClick={getDateSortHandler(sortType, setSortType)}
-                className={cx(style.commentsButton, {hide: !full})}
-            >{"Sort by date " + getDateSortSymbol(sortType)}
+                className={cx(style.commentsButton, {hide: !onSelfPage})}
+            >{'Sort by date ' + getDateSortSymbol(sortType)}
             </button>
         </div>
     )
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Card)
