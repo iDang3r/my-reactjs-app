@@ -1,12 +1,15 @@
-import {useState} from 'react'
+import {useReducer} from 'react'
 import Card from '../components/Card/Card'
 import style from '../app/App.module.scss'
-import {Sort, SortType, getLikesSortHandler, getDateSortHandler,
-    getDateSortSymbol, getLikeSortSymbol}
-    from '../components/Common'
+import {
+    Sort, initSortType, reduceSortType,
+    getLikeSortSymbol, getDateSortSymbol,
+}
+    from '../components/CommonSort'
 
 import {connect} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
+import {SetLogInLogOutPage} from './common'
 
 const mapStateToProps = (state) => ({
     cards: state.cardsReducer.cards,
@@ -14,8 +17,10 @@ const mapStateToProps = (state) => ({
 })
 
 function CardsPage({cards}) {
+    SetLogInLogOutPage(CardsPage)
+
     const navigate = useNavigate()
-    const [sortType, setSortType] = useState(SortType.default);
+    const [sortType, dispatchSortType] = useReducer(reduceSortType, '', initSortType)
 
     Sort(cards, sortType)
 
@@ -33,12 +38,12 @@ function CardsPage({cards}) {
             >{'Home'}
             </button>
             <button
-                onClick={getLikesSortHandler(sortType, setSortType)}
+                onClick={() => dispatchSortType('byLikes')}
                 className={style.button + ' ' + style.buttonUp}
             >{'Sort by likes ' + getLikeSortSymbol(sortType)}
             </button>
             <button
-                onClick={getDateSortHandler(sortType, setSortType)}
+                onClick={() => dispatchSortType('byDate')}
                 className={style.button + ' ' + style.buttonDown}
             >{'Sort by date ' + getDateSortSymbol(sortType)}
             </button>

@@ -1,4 +1,9 @@
-import { ActionTypes } from './types'
+import {ActionTypes} from './types'
+
+export const actionSetCards = (cards) => ({
+    type: ActionTypes.setCards,
+    payload: cards,
+})
 
 export const actionSetCard = (newCard) => ({
     type: ActionTypes.setCard,

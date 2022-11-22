@@ -4,11 +4,13 @@ import {HomePage} from '../pages/home.page'
 import {NotFoundPage} from '../pages/notFound.page'
 import CardPage from '../pages/card.page'
 import Cards from '../pages/cards.page'
+import Loader from '../store/Loader'
 
 export function App() {
     return (
         <div className={style.App}>
             <header className={style.AppHeader}>
+                <Loader/>
 
                 <Routes>
                     <Route path='/' element={<HomePage/>} />

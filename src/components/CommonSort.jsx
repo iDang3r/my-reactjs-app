@@ -24,39 +24,41 @@ export const Sort = (array, sortType) => {
     }
 }
 
-export const getLikesSortHandler = (sortType, setSortType) => {
-    return () => {
-        let newSortType
-        switch (sortType) {
-            case SortType.dateAsc:
-            case SortType.dateDesc:
-            case SortType.likesAsc:
-                newSortType = SortType.likesDesc
-                break
-            case SortType.likesDesc:
-            default:
-                newSortType = SortType.likesAsc
-                break
-        }
-        setSortType(newSortType)
+export const initSortType = () => {
+    return SortType.default
+}
+
+export const reduceSortType = (state, action) => {
+    console.log('reduceSortType: ', action)
+    switch (action) {
+        case 'byLikes':
+            return getLikesSortType(state)
+        case 'byDate':
+            return getDateSortType(state)
     }
 }
 
-export const getDateSortHandler = (sortType, setSortType) => {
-    return () => {
-        let newSortType
-        switch (sortType) {
-            case SortType.likesAsc:
-            case SortType.likesDesc:
-            case SortType.dateAsc:
-                newSortType = SortType.dateDesc
-                break
-            case SortType.dateDesc:
-            default:
-                newSortType = SortType.dateAsc
-                break
-        }
-        setSortType(newSortType)
+export const getLikesSortType = (sortType) => {
+    switch (sortType) {
+        case SortType.dateAsc:
+        case SortType.dateDesc:
+        case SortType.likesAsc:
+            return SortType.likesDesc
+        case SortType.likesDesc:
+        default:
+            return SortType.likesAsc
+    }
+}
+
+export const getDateSortType = (sortType) => {
+    switch (sortType) {
+        case SortType.likesAsc:
+        case SortType.likesDesc:
+        case SortType.dateAsc:
+            return SortType.dateDesc
+        case SortType.dateDesc:
+        default:
+            return SortType.dateAsc
     }
 }
 

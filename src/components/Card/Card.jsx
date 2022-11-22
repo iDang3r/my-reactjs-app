@@ -1,14 +1,16 @@
-import {useState} from 'react'
+import {useReducer} from 'react'
 import style from './Card.module.scss'
 import classNames from 'classnames/bind'
 import Comment from '../Comment/Comment'
-import {Sort, SortType, getLikesSortHandler, getDateSortHandler,
-        getLikeSortSymbol, getDateSortSymbol}
-    from '../Common'
+import {
+    Sort, initSortType, reduceSortType,
+    getLikeSortSymbol, getDateSortSymbol,
+}
+    from '../CommonSort'
 import {PopUp} from '../PopUpWindow/PopUpWindow'
 
 import {connect} from 'react-redux'
-import {actionSetCard} from '../../store/actions/setCard'
+import {actionSetCard} from '../../store/actions/cardsActions'
 import {useNavigate} from 'react-router-dom'
 
 const mapStateToProps = (state) => ({
@@ -31,8 +33,7 @@ function Card({cards, allComments, cardId, onSelfPage, setCard}) {
     }
 
     const comments = allComments.filter((comment) => comment.articleId.toString() === cardId.toString())
-
-    const [sortType, setSortType] = useState(SortType.default)
+    const [sortType, dispatchSortType] = useReducer(reduceSortType, '', initSortType)
 
     const popUpEditWindow = () => {
         card.edit = !card.edit
@@ -139,12 +140,12 @@ function Card({cards, allComments, cardId, onSelfPage, setCard}) {
             </button>
 
             <button
-                onClick={getLikesSortHandler(sortType, setSortType)}
+                onClick={() => dispatchSortType('byLikes')}
                 className={cx(style.commentsButton, {hide: !onSelfPage})}
             >{'Sort by likes ' + getLikeSortSymbol(sortType)}
             </button>
             <button
-                onClick={getDateSortHandler(sortType, setSortType)}
+                onClick={() => dispatchSortType('byDate')}
                 className={cx(style.commentsButton, {hide: !onSelfPage})}
             >{'Sort by date ' + getDateSortSymbol(sortType)}
             </button>

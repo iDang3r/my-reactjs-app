@@ -3,6 +3,12 @@ import {ActionTypes} from '../actions/types.js'
 
 export const cardsReducer = (state = initialState(), action) => {
     switch (action.type) {
+        case ActionTypes.setCards: {
+            return {
+                ...state,
+                cards: action.payload,
+            }
+        }
         case ActionTypes.setCard: {
             let state_ = structuredClone(state)
             const idx = state_.cards.findIndex((card) => card.articleId === action.payload.articleId)

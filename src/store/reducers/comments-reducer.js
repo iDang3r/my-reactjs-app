@@ -3,6 +3,12 @@ import {ActionTypes} from '../actions/types.js'
 
 export const commentsReducer = (state = initialState(), action) => {
     switch (action.type) {
+        case ActionTypes.setComments: {
+            return {
+                ...state,
+                comments: action.payload,
+            }
+        }
         case ActionTypes.removeComment: {
             let state_ = structuredClone(state)
             state_.comments.splice(state_.comments.findIndex(comment => comment.commentId === action.payload), 1)
