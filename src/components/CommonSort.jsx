@@ -35,6 +35,8 @@ export const reduceSortType = (state, action) => {
             return getLikesSortType(state)
         case 'byDate':
             return getDateSortType(state)
+        default:
+            return new Error('error type for action in reduceSortType')
     }
 }
 
