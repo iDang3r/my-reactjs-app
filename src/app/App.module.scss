@@ -44,4 +44,9 @@
     border-radius: 0 0 30px 30px;
     transform: translate(0, calc(100% - 2px)); // 2px border thickness
   }
+
+  &Home {
+    border-radius: 20px;
+    transform: translate(0, calc(-200% - 2px)); // 2px border thickness
+  }
 }
