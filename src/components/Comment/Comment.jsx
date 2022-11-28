@@ -2,8 +2,8 @@ import style from './Comment.module.scss'
 import classNames from 'classnames/bind'
 
 import {connect} from 'react-redux'
-import {actionDecCardCommentCounter} from '../../store/actions/setCard'
-import {actionChangeCommentLiked, actionRemoveComment} from '../../store/actions/removeComment'
+import {actionDecCardCommentCounter} from '../../store/actions/cardsActions'
+import {actionChangeCommentLiked, actionRemoveComment} from '../../store/actions/commentsActions'
 
 const mapStateToProps = (state) => ({
     comments: state.commentsReducer.comments,

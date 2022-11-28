@@ -9,6 +9,7 @@ import {rootReducer} from './store/reducers/root-reducer.js'
 const store = createStore(rootReducer)
 
 export function Wrapper() {
+    console.warn('WRAPPER')
     return (
         <BrowserRouter>
             <Provider store={store}>

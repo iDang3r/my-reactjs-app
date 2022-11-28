@@ -1,4 +1,9 @@
-import { ActionTypes } from './types'
+import {ActionTypes} from './types'
+
+export const actionSetComments = (comments) => ({
+    type: ActionTypes.setComments,
+    payload: comments,
+})
 
 export const actionRemoveComment = (idx) => ({
     type: ActionTypes.removeComment,
