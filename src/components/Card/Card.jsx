@@ -12,6 +12,7 @@ import {PopUp} from '../PopUpWindow/PopUpWindow'
 import {connect} from 'react-redux'
 import {actionSetCard} from '../../store/actions/cardsActions'
 import {useNavigate} from 'react-router-dom'
+import {useLocalStorage} from '../../localStorage/useLocalStorage'
 
 const mapStateToProps = (state) => ({
     allComments: state.commentsReducer.comments,
@@ -26,6 +27,7 @@ const cx = classNames.bind(style)
 
 function Card({cards, allComments, cardId, onSelfPage, setCard}) {
     const navigate = useNavigate()
+    const [user, _] = useLocalStorage('user', null)
 
     let card = cards.find(card => card.articleId.toString() === cardId.toString())
     if (card === undefined) {
@@ -103,13 +105,16 @@ function Card({cards, allComments, cardId, onSelfPage, setCard}) {
 
     return (
         <div className={cx({card: true}, onSelfPage ? style.cardFull : style.cardNotFull)}>
-            <div>
-                <button
-                    onClick={popUpEditWindow}
-                    className={cx(style.editButton, {hide: !onSelfPage})}
-                >Edit card</button>
-                {card.edit ? <PopUp inner={editWindow}/> : null}
-            </div>
+            {
+                user && user.isAdmin ?
+                <div>
+                    <button
+                        onClick={popUpEditWindow}
+                        className={cx(style.editButton, {hide: !onSelfPage})}
+                    >Edit card</button>
+                    {card.edit ? <PopUp inner={editWindow}/> : null}
+                </div> : null
+            }
 
             <div className={style.createDate}>{card.createDate}</div>
             <h1  className={style.title}>{card.title}</h1>
